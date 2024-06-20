@@ -1,5 +1,6 @@
 from fastapi import Depends, FastAPI, HTTPException
+app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Welcome to End-shelf-API"}
