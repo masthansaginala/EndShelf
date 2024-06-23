@@ -61,22 +61,6 @@ class UserUpdate(BaseModel):
     user_updated_at: Optional[datetime] = None
     user_delete_at: Optional[datetime] = None
 
-
-# VendorCreate schema
-class VendorCreate(BaseModel):
-    vendor_shop_name: str
-    vendor_shop_license_number: str
-    vendor_shop_email: str
-    vendor_shop_phone_number: str
-    vendor_shop_address: str
-    vendor_shop_city: str
-    vendor_shop_country: str
-    vendor_shop_zipcode: str
-    vendor_delivery: str
-    vendor_status: Optional[str] = None
-    vendor_admin_remarks: Optional[str] = None
-    user_id: int
-
 # VendorGet schema
 class VendorGet(BaseModel):
     vendor_id: int
@@ -115,3 +99,65 @@ class VendorUpdate(BaseModel):
     user_id: Optional[int] = None
     vendor_updated_at: Optional[datetime] = None
     vendor_delete_at: Optional[datetime] = None
+
+class VendorCreate(BaseModel):
+    vendor_shop_name: str
+    vendor_shop_license_number: str
+    vendor_shop_email: str
+    vendor_shop_phone_number: str
+    vendor_shop_address: str
+    vendor_shop_city: str
+    vendor_shop_country: str
+    vendor_shop_zipcode: str
+    vendor_delivery: str
+    user_id: int
+    vendor_status: Optional[str] = None
+    vendor_admin_remarks: Optional[str] = None
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+    user_id: int
+
+
+# UserLogin schema
+class UserLogin(BaseModel):
+    user_email: str
+    user_password: str
+
+class ItemCreate(BaseModel):
+    item_category: str
+    item_name: str
+    item_price: Optional[int] = None
+    item_quantity: Optional[int] = None
+    item_quantity_available: Optional[int] = None
+    item_expiry_date: Optional[datetime] = None
+    item_available_date: Optional[datetime] = None
+    vendor_id: int
+    user_id: int
+
+class ItemGet(BaseModel):
+    item_id: int
+    item_category: str
+    item_name: str
+    item_price: Optional[int] = None
+    item_quantity: Optional[int] = None
+    item_quantity_available: Optional[int] = None
+    item_expiry_date: Optional[datetime] = None
+    item_available_date: Optional[datetime] = None
+    vendor_id: int
+    user_id: int
+    item_created_at: datetime
+    item_updated_at: Optional[datetime] = None
+    item_delete_at: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
+
+
+class ItemUpdate(BaseModel):
+    item_price: Optional[int] = None
+    item_quantity: Optional[int] = None
+    item_quantity_available: Optional[int] = None
+    item_expiry_date: Optional[datetime] = None
+    item_available_date: Optional[datetime] = None

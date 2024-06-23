@@ -48,3 +48,20 @@ class Vendor(Base):
     vendor_delete_at = Column(DateTime, nullable=True)
 
     user = relationship("User", back_populates="vendors")
+
+class Item(Base):
+    __tablename__ = "items"
+
+    item_id = Column(Integer, primary_key=True, index=True)
+    item_category = Column(String, nullable=False)
+    item_name = Column(String, nullable=False)
+    item_price = Column(Integer, nullable=True)
+    item_quantity = Column(Integer, nullable=True)
+    item_quantity_available = Column(Integer, nullable=True)
+    item_expiry_date = Column(DateTime, nullable=True)
+    item_available_date = Column(DateTime, nullable=True)
+    vendor_id = Column(Integer, ForeignKey("vendors.vendor_id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
+    item_created_at = Column(DateTime, nullable=False)
+    item_updated_at = Column(DateTime, nullable=True)
+    item_delete_at = Column(DateTime, nullable=True)
