@@ -26,7 +26,6 @@ class User(Base):
 
     vendors = relationship("Vendor", back_populates="user")
 
-
 class Vendor(Base):
     __tablename__ = "vendors"
 
@@ -58,6 +57,7 @@ class Item(Base):
     item_price = Column(Integer, nullable=True)
     item_quantity = Column(Integer, nullable=True)
     item_quantity_available = Column(Integer, nullable=True)
+    item_image_url = Column(String, nullable=True)
     item_expiry_date = Column(DateTime, nullable=True)
     item_available_date = Column(DateTime, nullable=True)
     vendor_id = Column(Integer, ForeignKey("vendors.vendor_id"), nullable=False)
@@ -65,3 +65,32 @@ class Item(Base):
     item_created_at = Column(DateTime, nullable=False)
     item_updated_at = Column(DateTime, nullable=True)
     item_delete_at = Column(DateTime, nullable=True)
+
+class Order(Base):
+    __tablename__ = "orders"
+
+    order_id = Column(Integer, primary_key=True, index=True)
+    item_id = Column(Integer, ForeignKey("items.item_id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
+    purchased_quantity = Column(Integer, nullable=False)
+    order_price = Column(Integer, nullable=False)
+    order_status = Column(String, nullable=True)
+    order_created_at = Column(DateTime, nullable=False)
+    order_updated_at = Column(DateTime, nullable=True)
+    order_delete_at = Column(DateTime, nullable=True)
+
+class Dispute(Base):
+    __tablename__ = "disputes"
+
+    dispute_id = Column(Integer, primary_key=True, index=True)
+    order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=False)
+    dispute_category = Column(String, nullable=True)
+    dispute_title = Column(String, nullable=False)
+    dispute_description = Column(String, nullable=False)
+    dispute_remarks = Column(String, nullable=True)
+    dispute_status = Column(String, nullable=True)
+    dispute_created_at = Column(DateTime, nullable=False)
+    dispute_updated_at = Column(DateTime, nullable=True)
+    dispute_delete_at = Column(DateTime, nullable=True)
+
+
