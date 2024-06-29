@@ -84,6 +84,7 @@ class Dispute(Base):
 
     dispute_id = Column(Integer, primary_key=True, index=True)
     order_id = Column(Integer, ForeignKey("orders.order_id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)  # Add this field
     dispute_category = Column(String, nullable=True)
     dispute_title = Column(String, nullable=False)
     dispute_description = Column(String, nullable=False)
@@ -92,5 +93,4 @@ class Dispute(Base):
     dispute_created_at = Column(DateTime, nullable=False)
     dispute_updated_at = Column(DateTime, nullable=True)
     dispute_delete_at = Column(DateTime, nullable=True)
-
 

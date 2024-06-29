@@ -114,6 +114,7 @@ class Token(BaseModel):
     token_type: str
     user_id: int
     vendor_id: Optional[int] = None
+    user_role: str
 
 class UserLogin(BaseModel):
     user_email: str
@@ -179,6 +180,7 @@ class OrderGet(BaseModel):
     order_created_at: datetime
     order_updated_at: Optional[datetime] = None
     order_delete_at: Optional[datetime] = None
+    dispute_id: Optional[int] = None  # Add this field
 
     class Config:
         orm_mode = True
@@ -188,11 +190,31 @@ class OrderStatusUpdate(BaseModel):
 
 class DisputeCreate(BaseModel):
     order_id: int
+    user_id: int
     dispute_category: Optional[str] = None
     dispute_title: str
     dispute_description: str
     dispute_remarks: Optional[str] = None
     dispute_status: Optional[str] = None
 
+
 class DisputeStatusUpdate(BaseModel):
     dispute_status: str
+    dispute_remarks: Optional[str] = None
+
+class DisputeGet(BaseModel):
+    dispute_id: int
+    order_id: int
+    user_id: int
+    dispute_category: Optional[str] = None
+    dispute_title: str
+    dispute_description: str
+    dispute_remarks: Optional[str] = None
+    dispute_status: Optional[str] = None
+    dispute_created_at: datetime
+    dispute_updated_at: Optional[datetime] = None
+    dispute_delete_at: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
+

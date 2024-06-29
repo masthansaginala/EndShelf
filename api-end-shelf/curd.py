@@ -25,7 +25,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         user_status=user.user_status,
         user_organisation=user.user_organisation,
         user_orgainsation_type=user.user_orgainsation_type,
-        user_role=user.user_role,
+        user_role="user",
         user_created_at=datetime.now(timezone.utc)  # Use timezone-aware datetime
     )
     db.add(db_user)
@@ -38,7 +38,6 @@ def verify_user_credentials(db: Session, email: str, password: str):
     if user and bcrypt.checkpw(password.encode('utf-8'), user.user_password.encode('utf-8')):
         return user
     return None
-
 
 def create_vendor(db: Session, vendor: schemas.VendorCreate):
     # Create the vendor entry
@@ -67,25 +66,6 @@ def create_vendor(db: Session, vendor: schemas.VendorCreate):
     db.refresh(db_vendor)
     return db_vendor
 
-# def create_item(db: Session, item: schemas.ItemCreate):
-#     db_item = models.Item(
-#         item_category=item.item_category,
-#         item_name=item.item_name,
-#         item_price=item.item_price,
-#         item_quantity=item.item_quantity,
-#         item_quantity_available=item.item_quantity_available,
-#         item_image_url=item.item_image_url,
-#         item_expiry_date=item.item_expiry_date,
-#         item_available_date=item.item_available_date,
-#         vendor_id=item.vendor_id,
-#         user_id=item.user_id,
-#         item_created_at=datetime.now(timezone.utc)
-#     )
-#     db.add(db_item)
-#     db.commit()
-#     db.refresh(db_item)
-#     return db_item
-
 def create_item(db: Session, item: schemas.ItemCreate, item_image_url: str):
     db_item = models.Item(
         item_category=item.item_category,
@@ -105,30 +85,11 @@ def create_item(db: Session, item: schemas.ItemCreate, item_image_url: str):
     db.refresh(db_item)
     return db_item
 
-
 def get_items_by_vendor(db: Session, vendor_id: int):
     return db.query(models.Item).filter(models.Item.vendor_id == vendor_id, models.Item.item_delete_at == None).all()
 
 def get_item_by_id(db: Session, item_id: int):
     return db.query(models.Item).filter(models.Item.item_id == item_id).first()
-
-# def update_item(db: Session, item_id: int, item_update: schemas.ItemUpdate):
-#     db_item = db.query(models.Item).filter(models.Item.item_id == item_id).first()
-#     if db_item:
-#         if item_update.item_price is not None:
-#             db_item.item_price = item_update.item_price
-#         if item_update.item_quantity is not None:
-#             db_item.item_quantity = item_update.item_quantity
-#         if item_update.item_quantity_available is not None:
-#             db_item.item_quantity_available = item_update.item_quantity_available
-#         if item_update.item_expiry_date is not None:
-#             db_item.item_expiry_date = item_update.item_expiry_date
-#         if item_update.item_available_date is not None:
-#             db_item.item_available_date = item_update.item_available_date
-#         db_item.item_updated_at = datetime.now(timezone.utc)
-#         db.commit()
-#         db.refresh(db_item)
-#     return db_item
 
 def update_item(db: Session, item_id: int, item_update: schemas.ItemUpdate, item_image_url: Optional[str] = None):
     db_item = db.query(models.Item).filter(models.Item.item_id == item_id).first()
@@ -153,7 +114,6 @@ def update_item(db: Session, item_id: int, item_update: schemas.ItemUpdate, item
         db.commit()
         db.refresh(db_item)
     return db_item
-
 
 def delete_item(db: Session, item_id: int):
     db_item = db.query(models.Item).filter(models.Item.item_id == item_id).first()
@@ -202,14 +162,18 @@ def get_orders_by_vendor_id(db: Session, vendor_id: int, order_status: Optional[
     )
     if order_status:
         query = query.filter(models.Order.order_status == order_status)
-    else:
-        query = query.filter(models.Order.order_status == "Pending")
     
     return query.all()
 
-
 def get_orders_by_user_id(db: Session, user_id: int):
-    return db.query(models.Order).filter(models.Order.user_id == user_id).all()
+    orders = db.query(models.Order).filter(models.Order.user_id == user_id).all()
+    for order in orders:
+        dispute = db.query(models.Dispute).filter(
+            models.Dispute.order_id == order.order_id,
+            models.Dispute.dispute_delete_at == None
+        ).first()
+        order.dispute_id = dispute.dispute_id if dispute else None
+    return orders
 
 def update_order_status(db: Session, order_id: int, order_status: str):
     db_order = db.query(models.Order).filter(models.Order.order_id == order_id).first()
@@ -220,9 +184,25 @@ def update_order_status(db: Session, order_id: int, order_status: str):
         db.refresh(db_order)
     return db_order
 
+# def create_dispute(db: Session, dispute: schemas.DisputeCreate):
+#     db_dispute = models.Dispute(
+#         order_id=dispute.order_id,
+#         dispute_category=dispute.dispute_category,
+#         dispute_title=dispute.dispute_title,
+#         dispute_description=dispute.dispute_description,
+#         dispute_remarks=dispute.dispute_remarks,
+#         dispute_status=dispute.dispute_status,
+#         dispute_created_at=datetime.now(timezone.utc)
+#     )
+#     db.add(db_dispute)
+#     db.commit()
+#     db.refresh(db_dispute)
+#     return db_dispute
+
 def create_dispute(db: Session, dispute: schemas.DisputeCreate):
     db_dispute = models.Dispute(
         order_id=dispute.order_id,
+        user_id=dispute.user_id,  # Handle user_id
         dispute_category=dispute.dispute_category,
         dispute_title=dispute.dispute_title,
         dispute_description=dispute.dispute_description,
@@ -235,29 +215,30 @@ def create_dispute(db: Session, dispute: schemas.DisputeCreate):
     db.refresh(db_dispute)
     return db_dispute
 
-def update_dispute_status(db: Session, dispute_id: int, dispute_status: str):
+
+
+def update_dispute_status(db: Session, dispute_id: int, dispute_status: str, dispute_remarks: Optional[str] = None):
     db_dispute = db.query(models.Dispute).filter(models.Dispute.dispute_id == dispute_id).first()
     if db_dispute:
         db_dispute.dispute_status = dispute_status
+        db_dispute.dispute_remarks = dispute_remarks
         db_dispute.dispute_updated_at = datetime.now(timezone.utc)
         db.commit()
         db.refresh(db_dispute)
     return db_dispute
 
 def get_disputes_by_user_id(db: Session, user_id: int, dispute_status: Optional[str] = None):
-    query = db.query(models.Dispute).join(models.Order).filter(
-        models.Order.user_id == user_id,
-        models.Dispute.dispute_delete_at == None,
-        models.Dispute.order_id == models.Order.order_id
+    query = db.query(models.Dispute).filter(
+        models.Dispute.user_id == user_id,
+        models.Dispute.dispute_delete_at == None
     )
     if dispute_status:
         query = query.filter(models.Dispute.dispute_status == dispute_status)
-    else:
-        query = query.filter(models.Dispute.dispute_status == "open")
     
     return query.all()
 
-def get_disputes_by_vendor_id(db: Session, vendor_id: int, dispute_status: Optional[str] = None):
+
+def get_disputes_by_vendor_id(db: Session, vendor_id: int, dispute_status: Optional[str] = None, dispute_category: Optional[str] = None):
     query = db.query(models.Dispute).join(models.Order).join(models.Item).filter(
         models.Item.vendor_id == vendor_id,
         models.Dispute.dispute_delete_at == None,
@@ -266,10 +247,13 @@ def get_disputes_by_vendor_id(db: Session, vendor_id: int, dispute_status: Optio
     )
     if dispute_status:
         query = query.filter(models.Dispute.dispute_status == dispute_status)
-    else:
-        query = query.filter(models.Dispute.dispute_status == "open")
-    
+
+    if dispute_category:
+        query = query.filter(models.Dispute.dispute_category == dispute_category)
+
     return query.all()
+
+
 
 def delete_dispute(db: Session, dispute_id: int, user_id: int):
     db_dispute = db.query(models.Dispute).join(models.Order).filter(
@@ -279,6 +263,7 @@ def delete_dispute(db: Session, dispute_id: int, user_id: int):
     ).first()
     
     if db_dispute:
+        db_dispute.dispute_status = "Closed"
         db_dispute.dispute_delete_at = datetime.now(timezone.utc)
         db.commit()
         db.refresh(db_dispute)
@@ -287,3 +272,18 @@ def delete_dispute(db: Session, dispute_id: int, user_id: int):
 def get_vendor_id_by_user_id(db: Session, user_id: int):
     vendor = db.query(models.Vendor).filter(models.Vendor.user_id == user_id).first()
     return vendor.vendor_id if vendor else None
+
+def get_all_users(db: Session):
+    return db.query(models.User).all()
+
+def get_all_vendors(db: Session):
+    return db.query(models.Vendor).all()
+
+def get_all_items(db: Session):
+    return db.query(models.Item).all()
+
+def get_all_orders(db: Session):
+    return db.query(models.Order).all()
+
+def get_all_disputes(db: Session):
+    return db.query(models.Dispute).all()
