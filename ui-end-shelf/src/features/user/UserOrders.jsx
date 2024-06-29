@@ -101,7 +101,7 @@ export default function UserOrders() {
                   }}
                   disabled={order.dispute_id !== null}
                   className={`mt-2 px-4 py-2 text-sm font-medium text-white ${
-                    order.dispute_id !== 0 ? "bg-gray-400" : "bg-indigo-600 hover:bg-indigo-700"
+                    order.dispute_id !== 0 ? "bg-gray-400" : "bg-custom-orange hover:bg-custom-orange"
                   } rounded-lg`}
                 >
                   Raise Dispute
@@ -203,7 +203,7 @@ export default function UserOrders() {
                   </div>
                   <button
                     type="submit"
-                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-custom-orange px-8 py-3 text-base font-medium text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
                   >
                     Submit Dispute
                   </button>

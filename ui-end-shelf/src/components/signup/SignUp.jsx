@@ -120,7 +120,7 @@ const SignUp = () => {
                 value={formData?.user_full_name || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_full_name && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_full_name}</p>
@@ -142,7 +142,7 @@ const SignUp = () => {
                 value={formData?.user_dob || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_dob && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_dob}</p>
@@ -163,7 +163,7 @@ const SignUp = () => {
                 value={formData?.user_gender || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
@@ -190,7 +190,7 @@ const SignUp = () => {
                 value={formData?.user_phone_number || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_phone_number && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_phone_number}</p>
@@ -213,7 +213,7 @@ const SignUp = () => {
                 value={formData?.user_email || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_email && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_email}</p>
@@ -235,7 +235,7 @@ const SignUp = () => {
                 value={formData?.user_address || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_address && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_address}</p>
@@ -257,7 +257,7 @@ const SignUp = () => {
                 value={formData?.user_city || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_city && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_city}</p>
@@ -279,7 +279,7 @@ const SignUp = () => {
                 value={formData?.user_country || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_country && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_country}</p>
@@ -301,7 +301,7 @@ const SignUp = () => {
                 value={formData?.user_zipcode || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_zipcode && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_zipcode}</p>
@@ -323,7 +323,7 @@ const SignUp = () => {
                 value={formData?.user_organisation || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_organisation && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_organisation}</p>
@@ -344,7 +344,7 @@ const SignUp = () => {
                 value={formData?.user_organisation_type || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               >
                 <option value="">Select Organisation Type</option>
                 <option value="Self-Individual">Self-Individual</option>
@@ -382,7 +382,7 @@ const SignUp = () => {
                 value={formData?.user_password || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors.user_password && (
                 <p className="mt-2 text-sm text-red-600">{errors?.user_password}</p>
@@ -404,7 +404,7 @@ const SignUp = () => {
                 value={formData?.confirmPassword || ""}
                 onChange={handleChange}
                 required
-                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="block w-full rounded-md border-gray-300 shadow-sm py-2 px-3 text-gray-900 placeholder-gray-400 focus:ring-custom-orange focus:border-custom-orange sm:text-sm"
               />
               {errors?.confirmPassword && (
                 <p className="mt-2 text-sm text-red-600">
@@ -416,7 +416,7 @@ const SignUp = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-custom-orange px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-custom-focyell focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="flex w-full justify-center rounded-md bg-custom-orange px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-custom-focyell focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange"
             >
               Sign Up
             </button>

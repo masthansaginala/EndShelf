@@ -72,12 +72,12 @@ export default function NavBar() {
     : publicNavigation;
 
   return (
-    <header className="bg-white">
+    <header className="bg-white h-16">
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8 border-b border-gray-200" aria-label="Global">
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img className="h-8 w-auto" src={logo} alt="Logo" />
+            <span className="sr-only">End Shelf</span>
+            {/* <img className="h-8 w-auto" src={logo} alt="Logo" /> */}
           </Link>
         </div>
         <div className="flex lg:hidden">

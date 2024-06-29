@@ -63,7 +63,7 @@ const AlertModal = ({ message, onConfirm, onCancel }) => {
               <button
                 type="button"
                 onClick={onConfirm}
-                class="mt-3 inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white ml-2 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-700 sm:mt-0 sm:w-auto"
+                class="mt-3 inline-flex w-full justify-center rounded-md bg-custom-orange px-3 py-2 text-sm font-semibold text-white ml-2 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-custom-orange sm:mt-0 sm:w-auto"
               >
                 ok
               </button>

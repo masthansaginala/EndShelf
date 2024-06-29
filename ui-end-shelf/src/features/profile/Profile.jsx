@@ -117,7 +117,7 @@ const Profile = () => {
             />
             <label
               htmlFor="profilePicture"
-              className="mt-6 flex items-center justify-center rounded-lg border border-transparent bg-indigo-600 text-base py-1 px-6 font-sm text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="mt-6 flex items-center justify-center rounded-lg border border-transparent bg-custom-orange text-base py-1 px-6 font-sm text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
             >
               Upload Profile Picture
             </label>
@@ -240,7 +240,7 @@ const Profile = () => {
         <div className="mt-8 flex justify-end">
           <button
             type="submit"
-            className="bg-indigo-600 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded"
+            className="bg-custom-orange hover:bg-custom-orange text-white font-semibold py-2 px-4 rounded"
           >
             Save Changes
           </button>
