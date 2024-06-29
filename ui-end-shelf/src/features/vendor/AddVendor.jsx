@@ -393,7 +393,7 @@ export default function AddVendorModal({ isOpen, handleModal, handleVendorProduc
 
                       <button
                         type="submit"
-                        className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-custom-orange px-8 py-3 text-base font-medium text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
                       >
                         {isOpen?.mode === "new" ? "Add Vendor" : "Edit Vendor"}
                       </button>

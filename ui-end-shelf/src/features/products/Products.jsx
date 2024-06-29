@@ -34,29 +34,28 @@ export default function Products() {
 
   return (
     <div className="bg-white">
-      <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-        Get free delivery on orders over $100
+      <p className="flex h-10 items-center justify-center bg-custom-yellowbg text-md font-bold font-medium text-custom-orange sm:px-6 lg:px-8">
+        Saving Freshness , Reducing waste. Check out Prodcuts at Lower Prices !!
       </p>
       <div>
-        <main className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
+        <main className="mx-auto sm:px-6 lg:px-8">
+          {/* <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10 bg-custom-appbg">
+            <h5 className="text-2xl font-bold tracking-tight text-gray-900">Products</h5>
+          </div> */}
+          <div className="flex items-baseline justify-center border-b border-gray-200 bg-custom-appbg">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900">Products</h5>
           </div>
 
-          <section aria-labelledby="products-heading" className="pb-24 pt-6">
-            <h2 id="products-heading" className="sr-only">Products</h2>
-
+          <section aria-labelledby="products-heading" className="">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               <div className="lg:col-span-4">
-                <div className="bg-white">
-                  <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                    <h2 className="sr-only">Products</h2>
-
+                <div className="bg-custom-yellowbg">
+                  <div className="mx-auto max-w-2xl py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
                       {items?.length ? (
                         items?.map((product) => (
                           <div key={product?.item_id} className="group">
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-custom-image xl:aspect-h-8 xl:aspect-w-7">
                               <img
                                 src={product?.item_image_url || "https://via.placeholder.com/300"}
                                 alt={product?.item_name}
@@ -71,7 +70,7 @@ export default function Products() {
                                 setActiveItem(product);
                                 handleModal();
                               }}
-                              className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                              className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-custom-orange hover:bg-custom-focyell focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom-orange"
                             >
                               Buy
                             </button>

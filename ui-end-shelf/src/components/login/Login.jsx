@@ -91,7 +91,7 @@ const Login = () => {
                 onBlur={validateForm}
                 onChange={(e) => setUserEmail(e.target.value)}
                 required
-                className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-orange sm:text-sm sm:leading-6"
               />
               {errors.email && (
                 <p className="mt-2 text-sm text-custom-errortxt">{errors.email}</p>
@@ -126,7 +126,7 @@ const Login = () => {
                 value={user_password}
                 onChange={(e) => setUserPassword(e.target.value)}
                 required
-                className="block w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 px-2 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-custom-orange sm:text-sm sm:leading-6"
               />
               {errors.password && (
                 <p className="mt-2 text-sm text-custom-errortxt">{errors.password}</p>
@@ -137,7 +137,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-custom-orange px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-custom-focyell focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-custom-orange px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-custom-focyell focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-custom-orange"
             >
               Sign in
             </button>

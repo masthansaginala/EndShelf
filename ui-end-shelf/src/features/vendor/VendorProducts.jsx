@@ -60,7 +60,7 @@ const VendorProducts = () => {
               onClick={() => {
                 setIsopen({ isOpen: true, mode: "new" });
               }}
-              className="mt-6 flex  items-center justify-center rounded-lg border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="mt-6 flex  items-center justify-center rounded-lg border border-transparent bg-custom-orange px-6 py-3 text-base font-medium text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
             >
               Add Item to Endshelf
             </button>

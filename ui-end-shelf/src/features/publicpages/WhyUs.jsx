@@ -6,7 +6,7 @@ import home from "../../assests/home.png";
 const WhyUs = () => {
 
   return (
-    <div className="bg-custom-orange">
+    <div className="bg-custom-orange h-full">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-16">
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
