@@ -56,7 +56,10 @@ export default function VendorRequest() {
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold mb-6">Orders</h2>
         <div className="mb-4">
-          <label htmlFor="order_status_filter" className="block text-gray-700 font-medium mb-2">
+          <label
+            htmlFor="order_status_filter"
+            className="block text-gray-700 font-medium mb-2"
+          >
             Filter by Order Status
           </label>
           <select
@@ -75,28 +78,56 @@ export default function VendorRequest() {
           </select>
         </div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {orders.map((order) => (
-            <div key={order.order_id} className="group relative bg-gray-100 p-4 rounded-lg shadow">
-              <h3 className="text-sm font-medium text-gray-700">Order ID: {order.order_id}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">Status: {order.order_status}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Price: ${order.order_price}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Quantity: {order.purchased_quantity}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsOpen(true);
-                  setUpdateOrderStatusForm({ order_id: order.order_id, order_status: order.order_status });
-                }}
-                disabled={order.order_status === "Delivered"}
-                className={`mt-2 px-4 py-2 text-sm font-medium text-white ${
-                  order.order_status === "Delivered" ? "bg-gray-400" : "bg-custom-orange hover:bg-custom-orange"
-                } rounded-lg`}
+          {orders?.length ? (
+            orders.map((order) => (
+              <div
+                key={order.order_id}
+                className="group relative bg-gray-100 p-4 rounded-lg shadow"
               >
-                Update Order
-              </button>
-            </div>
-          ))}
+                <h3 className="text-sm font-medium text-gray-700">
+                  Order ID: {order.order_id}
+                </h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Status: {order.order_status}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Price: ${order.order_price}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Quantity: {order.purchased_quantity}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(true);
+                    setUpdateOrderStatusForm({
+                      order_id: order.order_id,
+                      order_status: order.order_status,
+                    });
+                  }}
+                  disabled={order.order_status === "Delivered"}
+                  className={`mt-2 px-4 py-2 text-sm font-medium text-white ${
+                    order.order_status === "Delivered"
+                      ? "bg-gray-400"
+                      : "bg-custom-orange hover:bg-custom-orange"
+                  } rounded-lg`}
+                >
+                  Update Order
+                </button>
+              </div>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
+        {!orders?.length ? (
+          <div className="d-flex justify-content-center">
+            There are no current vendor requests. Please check the product page
+            to place an order.
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {isOpen && (

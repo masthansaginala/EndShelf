@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { getVendorDisputes, vendorDisputeStatusUpdate } from "../../api/loginapi";
+import {
+  getVendorDisputes,
+  vendorDisputeStatusUpdate,
+} from "../../api/loginapi";
 import { toast } from "react-toastify";
 
 const disputeStatuses = ["Open", "In Progress", "Closed"];
@@ -29,7 +32,7 @@ export default function VendorDisputes() {
   const [updateDisputeStatusForm, setUpdateDisputeStatusForm] = useState({
     dispute_status: "",
     dispute_remarks: "",
-    order_id:0
+    order_id: 0,
   });
   const [currentDisputeId, setCurrentDisputeId] = useState(null);
 
@@ -52,7 +55,11 @@ export default function VendorDisputes() {
     e.preventDefault();
     const vendor_id = localStorage.getItem("vendor_id");
     try {
-      await vendorDisputeStatusUpdate(currentDisputeId, vendor_id, updateDisputeStatusForm);
+      await vendorDisputeStatusUpdate(
+        currentDisputeId,
+        vendor_id,
+        updateDisputeStatusForm
+      );
       toast.success("Dispute status updated successfully");
       setIsOpen(false);
       fetchVendorDisputes(disputeStatusFilter, disputeCategoryFilter);
@@ -67,12 +74,15 @@ export default function VendorDisputes() {
   }, [disputeStatusFilter, disputeCategoryFilter]);
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold mb-6">Disputes</h2>
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="dispute_status_filter" className="block text-gray-700 font-medium mb-2">
+            <label
+              htmlFor="dispute_status_filter"
+              className="block text-gray-700 font-medium mb-2"
+            >
               Filter by Dispute Status
             </label>
             <select
@@ -91,7 +101,10 @@ export default function VendorDisputes() {
             </select>
           </div>
           <div>
-            <label htmlFor="dispute_category_filter" className="block text-gray-700 font-medium mb-2">
+            <label
+              htmlFor="dispute_category_filter"
+              className="block text-gray-700 font-medium mb-2"
+            >
               Filter by Dispute Category
             </label>
             <select
@@ -111,26 +124,52 @@ export default function VendorDisputes() {
           </div>
         </div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {disputes.map((dispute) => (
-            <div key={dispute.order_id} className="group relative bg-gray-100 p-4 rounded-lg shadow">
-              <h3 className="text-sm font-medium text-gray-700">Order ID: {dispute.order_id}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">Category: {dispute.dispute_category}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Title: {dispute.dispute_title}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Status: {dispute.dispute_status}</p>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsOpen(true);
-                  setCurrentDisputeId(dispute.dispute_id);
-                  setUpdateDisputeStatusForm({ dispute_status: dispute.dispute_status, dispute_remarks: dispute.dispute_remarks });
-                }}
-                className="mt-2 px-4 py-2 text-sm font-medium text-white bg-custom-orange hover:bg-custom-orange rounded-lg"
+          {disputes?.length ? (
+            disputes.map((dispute) => (
+              <div
+                key={dispute.order_id}
+                className="group relative bg-gray-100 p-4 rounded-lg shadow"
               >
-                Update Dispute Status
-              </button>
-            </div>
-          ))}
+                <h3 className="text-sm font-medium text-gray-700">
+                  Order ID: {dispute.order_id}
+                </h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Category: {dispute.dispute_category}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Title: {dispute.dispute_title}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Status: {dispute.dispute_status}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(true);
+                    setCurrentDisputeId(dispute.dispute_id);
+                    setUpdateDisputeStatusForm({
+                      dispute_status: dispute.dispute_status,
+                      dispute_remarks: dispute.dispute_remarks,
+                    });
+                  }}
+                  className="mt-2 px-4 py-2 text-sm font-medium text-white bg-custom-orange hover:bg-custom-orange rounded-lg"
+                >
+                  Update Dispute Status
+                </button>
+              </div>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
+        {!disputes?.length ? (
+          <div className="d-flex justify-content-center">
+            There are no current vendor disputes. Please check the product page
+            to place an order.
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
 
       {isOpen && (
@@ -154,7 +193,9 @@ export default function VendorDisputes() {
                   <span className="sr-only">Close</span>
                   <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-                <h2 className="text-2xl font-bold mb-6">Update Dispute Status</h2>
+                <h2 className="text-2xl font-bold mb-6">
+                  Update Dispute Status
+                </h2>
                 <form onSubmit={handleUpdateStatusSubmit}>
                   <div className="mb-4">
                     <label

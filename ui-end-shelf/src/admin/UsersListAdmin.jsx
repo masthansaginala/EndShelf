@@ -21,9 +21,11 @@ export default function UsersListAdmin() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <h2 className="text-2xl font-bold mb-6">Users List</h2>
+        <h2 className="text-2xl font-bold mb-6 text-custom-focyell">
+          Users List
+        </h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border">
+          <table className="min-w-full bg-white border table-wrapper">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b">ID</th>
@@ -38,10 +40,6 @@ export default function UsersListAdmin() {
                 <th className="py-2 px-4 border-b">Zipcode</th>
                 <th className="py-2 px-4 border-b">Organisation</th>
                 <th className="py-2 px-4 border-b">Organisation Type</th>
-                <th className="py-2 px-4 border-b">Role</th>
-                <th className="py-2 px-4 border-b">Status</th>
-                <th className="py-2 px-4 border-b">Created At</th>
-                <th className="py-2 px-4 border-b">Updated At</th>
               </tr>
             </thead>
             <tbody>
@@ -49,21 +47,25 @@ export default function UsersListAdmin() {
                 users.map((user) => (
                   <tr key={user.user_id}>
                     <td className="py-2 px-4 border-b">{user.user_id}</td>
-                    <td className="py-2 px-4 border-b">{user.user_full_name}</td>
+                    <td className="py-2 px-4 border-b">
+                      {user.user_full_name}
+                    </td>
                     <td className="py-2 px-4 border-b">{user.user_dob}</td>
                     <td className="py-2 px-4 border-b">{user.user_gender}</td>
-                    <td className="py-2 px-4 border-b">{user.user_phone_number}</td>
+                    <td className="py-2 px-4 border-b">
+                      {user.user_phone_number}
+                    </td>
                     <td className="py-2 px-4 border-b">{user.user_email}</td>
                     <td className="py-2 px-4 border-b">{user.user_address}</td>
                     <td className="py-2 px-4 border-b">{user.user_city}</td>
                     <td className="py-2 px-4 border-b">{user.user_country}</td>
                     <td className="py-2 px-4 border-b">{user.user_zipcode}</td>
-                    <td className="py-2 px-4 border-b">{user.user_organisation}</td>
-                    <td className="py-2 px-4 border-b">{user.user_orgainsation_type}</td>
-                    <td className="py-2 px-4 border-b">{user.user_role}</td>
-                    <td className="py-2 px-4 border-b">{user.user_status}</td>
-                    <td className="py-2 px-4 border-b">{user.user_created_at}</td>
-                    <td className="py-2 px-4 border-b">{user.user_updated_at}</td>
+                    <td className="py-2 px-4 border-b">
+                      {user.user_organisation}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {user.user_orgainsation_type}
+                    </td>
                   </tr>
                 ))
               ) : (
