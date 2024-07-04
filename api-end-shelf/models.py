@@ -18,7 +18,7 @@ class User(Base):
     user_password = Column(String, nullable=False)
     user_status = Column(String, nullable=True)
     user_organisation = Column(String, nullable=True)
-    user_orgainsation_type = Column(String, nullable=True)
+    user_organisation_type = Column(String, nullable=True)
     user_role = Column(String, nullable=True)
     user_created_at = Column(DateTime, nullable=False)
     user_updated_at = Column(DateTime, nullable=True)
