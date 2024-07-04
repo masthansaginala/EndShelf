@@ -103,6 +103,11 @@ def login_user(user_login: schemas.UserLogin, db: Session = Depends(get_db)):
         "user_role": user.user_role  # Include user_role in the response
     }
 
+# @app.post("/user-register-vendor/", response_model=schemas.VendorGet)
+# def create_vendor(vendor: schemas.VendorCreate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+#     logger.info(f"Creating vendor profile for user: {current_user.user_email} with data: {vendor}")
+#     return crud.create_vendor(db=db, vendor=vendor)
+
 @app.post("/user-register-vendor/", response_model=schemas.VendorGet)
 def create_vendor(vendor: schemas.VendorCreate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     logger.info(f"Creating vendor profile for user: {current_user.user_email} with data: {vendor}")

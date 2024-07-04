@@ -4,13 +4,19 @@ import bcrypt
 import models
 import schemas
 from typing import Optional
+import logging
 
+
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.user_email == email).first()
 
 def create_user(db: Session, user: schemas.UserCreate):
     hashed_password = bcrypt.hashpw(user.user_password.encode('utf-8'), bcrypt.gensalt())  # Hash the password
+    logger.info(user.user_organisation_type)
     db_user = models.User(
         user_full_name=user.user_full_name,
         user_dob=user.user_dob,
@@ -24,7 +30,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         user_password=hashed_password.decode('utf-8'),  # Store the hashed password
         user_status=user.user_status,
         user_organisation=user.user_organisation,
-        user_orgainsation_type=user.user_orgainsation_type,
+        user_organisation_type=user.user_organisation_type,
         user_role="user",
         user_created_at=datetime.now(timezone.utc)  # Use timezone-aware datetime
     )
@@ -147,6 +153,7 @@ def create_order(db: Session, order: schemas.OrderCreate):
         db_item.item_quantity_available -= order.purchased_quantity
         db.commit()
         db.refresh(db_item)
+    logger.info(f"db_item", {db_item}, {db_item.item_quantity_available-order.purchased_quantity})
     
     db.commit()
     db.refresh(db_order)

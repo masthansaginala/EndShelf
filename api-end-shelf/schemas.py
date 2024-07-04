@@ -15,7 +15,7 @@ class UserCreate(BaseModel):
     user_password: str
     user_status: Optional[str] = None
     user_organisation: Optional[str] = None
-    user_orgainsation_type: Optional[str] = None
+    user_organisation_type: Optional[str] = None
     user_role: Optional[str] = None
 
 class UserGet(BaseModel):
@@ -31,7 +31,7 @@ class UserGet(BaseModel):
     user_zipcode: str
     user_status: Optional[str] = None
     user_organisation: Optional[str] = None
-    user_orgainsation_type: Optional[str] = None
+    user_organisation_type: Optional[str] = None
     user_role: Optional[str] = None
     user_created_at: datetime
     user_updated_at: Optional[datetime] = None
@@ -53,7 +53,7 @@ class UserUpdate(BaseModel):
     user_password: Optional[str] = None
     user_status: Optional[str] = None
     user_organisation: Optional[str] = None
-    user_orgainsation_type: Optional[str] = None
+    user_organisation_type: Optional[str] = None
     user_role: Optional[str] = None
     user_updated_at: Optional[datetime] = None
     user_delete_at: Optional[datetime] = None
