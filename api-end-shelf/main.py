@@ -103,24 +103,19 @@ def login_user(user_login: schemas.UserLogin, db: Session = Depends(get_db)):
         "user_role": user.user_role  # Include user_role in the response
     }
 
-# @app.post("/user-register-vendor/", response_model=schemas.VendorGet)
-# def create_vendor(vendor: schemas.VendorCreate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
-#     logger.info(f"Creating vendor profile for user: {current_user.user_email} with data: {vendor}")
-#     return crud.create_vendor(db=db, vendor=vendor)
-
 @app.post("/user-register-vendor/", response_model=schemas.VendorGet)
 def create_vendor(vendor: schemas.VendorCreate, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     logger.info(f"Creating vendor profile for user: {current_user.user_email} with data: {vendor}")
     vendor_data = crud.create_vendor(db=db, vendor=vendor)
     
     # Send a confirmation email to the vendor
-    subject = f"Thanks for your {vendor.vendor_shop_name} registration on EndShelf"
+    subject = f"Thanks for your {vendor.vendor_shop_name} Shop registration on EndShelf"
     body = f"""
     Hello {vendor.vendor_shop_name},
     
-    Your Shop Registration process has been completed Successfully.
+    Your Shop Registration process has been completed Successfully on End Shelf.
 
-    Let's End Shelf
+    Let's Begin Saving Freshness, Reducing Waste ! 
 
     Thank you,
     EndShelf Team.
