@@ -21,10 +21,12 @@ import {
   HomeIcon,
   ClipboardDocumentListIcon,
   XMarkIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 import logo from "../../assests/endshelftransparent.png";
+import AddVendorModal from "../vendor/AddVendor";
 
 const publicNavigation = [
   { name: "EndShelf", href: "/end-shelf" },
@@ -42,7 +44,6 @@ const adminNavigation = [
 
 const userNavigation = [
   { name: "Home", href: "/user/home" },
-  { name: "Profile", href: "/user/profile" },
   { name: "Orders", href: "/user/orders" },
   { name: "Disputes", href: "/user/disputes" },
 ];
@@ -53,6 +54,7 @@ const vendorNavigation = [
   { name: "Vendor Requests", href: "/vendor/vendor-request" },
   { name: "Vendor Disputes", href: "/vendor/vendor-dispute" },
   { name: "Orders", href: "/vendor/orders" },
+  { name: "Disputes", href: "/vendor/disputes" },
 ];
 
 function classNames(...classes) {
@@ -62,6 +64,7 @@ function classNames(...classes) {
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isAuthenticated, logout, isVendor, isAdmin } = useAuth();
+  const [addVendor, setAddVendor] = useState(false);
 
   const navigation = isAuthenticated
     ? isAdmin
@@ -72,18 +75,26 @@ export default function NavBar() {
     : publicNavigation;
 
   return (
-    <header className="bg-white h-16">
-      <nav className="mx-auto flex items-center justify-between p-6 lg:px-8 border-b border-gray-200" aria-label="Global">
+    <header className="header-wrapper h-16 bg-custom-focyell">
+      <nav
+        className="mx-auto flex items-center justify-between p-3 lg:px-8 "
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
-          <Link to="/" className="-m-1.5 p-1.5">
+          <Link
+            to="/"
+            className="-m-1.5 p-1.5 text-white d-flex align-items-center"
+          >
             <span className="sr-only">End Shelf</span>
-            {/* <img className="h-8 w-auto" src={logo} alt="Logo" /> */}
+            {/* <UserCircleIcon className="h-5 w-5 mr-1 text-white" /> */}
+            <img className="h-8 w-auto" src={logo} alt="Logo" />
+            End Self
           </Link>
         </div>
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -92,10 +103,24 @@ export default function NavBar() {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => (
-            <Link key={item.name} to={item.href} className="text-sm font-semibold leading-6 text-gray-900">
+            <Link
+              key={item.name}
+              to={item.href}
+              className="text-sm font-semibold leading-6 nav-color-wrapper"
+            >
               {item.name}
             </Link>
           ))}
+          {isAuthenticated && !isAdmin && !isVendor && (
+            <p
+              onClick={() => {
+                setAddVendor({ isOpen: true, mode: "new" });
+              }}
+              className="text-white text-sm font-semibold leading-6 nav-color-wrapper"
+            >
+              Add Vendor
+            </p>
+          )}
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
           {isAuthenticated ? (
@@ -104,36 +129,13 @@ export default function NavBar() {
                 <MenuButton className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
+                  <UserCircleIcon className="h-5 w-5 mr-1 text-white" />
                 </MenuButton>
               </div>
               <MenuItems
                 transition
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
-                <MenuItem>
-                  {({ active }) => (
-                    <Link
-                      to={
-                        isAdmin
-                          ? "/admin/users-list"
-                          : isVendor
-                          ? "/vendor/profile"
-                          : "/user/profile"
-                      }
-                      className={classNames(
-                        active ? "bg-gray-100" : "",
-                        "block px-4 py-2 text-sm text-gray-700"
-                      )}
-                    >
-                      Profile
-                    </Link>
-                  )}
-                </MenuItem>
                 <MenuItem>
                   {({ active }) => (
                     <button
@@ -153,13 +155,13 @@ export default function NavBar() {
             <>
               <Link
                 to="/signup"
-                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                className="-mx-3 block text-sm text-white rounded-lg px-3 py-2.5 text-base font-semibold leading-7  "
               >
                 Sign Up
               </Link>
               <Link
                 to="/login"
-                className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                className="-mx-3 block text-sm text-white mx-2 rounded-lg px-3 py-2.5 text-base font-semibold leading-7  "
               >
                 Log In
               </Link>
@@ -167,17 +169,22 @@ export default function NavBar() {
           )}
         </div>
       </nav>
-      <Dialog className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <div className="fixed inset-0 z-10" />
+      <Dialog
+        className="lg:hidden"
+        open={mobileMenuOpen}
+        onClose={setMobileMenuOpen}
+      >
+        <div className="fixed inset-0 z-10 text-white" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img className="h-8 w-auto" src={logo} alt="Logo" />
+              {/* <img className="h-8 w-auto" src={logo} alt="Logo" /> */}
+              <UserCircleIcon className="h-5 w-5 mr-1 text-white" />
             </Link>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-white "
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -196,6 +203,16 @@ export default function NavBar() {
                     {item.name}
                   </Link>
                 ))}
+                {isAuthenticated && !isAdmin && !isVendor && (
+                  <p
+                    onClick={() => {
+                      setAddVendor({ isOpen: true, mode: "new" });
+                    }}
+                    className="text-white text-sm font-semibold leading-6 nav-color-wrapper"
+                  >
+                    Add Vendor
+                  </p>
+                )}
               </div>
               <div className="py-6">
                 {isAuthenticated ? (
@@ -214,18 +231,6 @@ export default function NavBar() {
                           />
                         </DisclosureButton>
                         <DisclosurePanel className="mt-2 space-y-2">
-                          <Link
-                            to={
-                              isAdmin
-                                ? "/admin/users-list"
-                                : isVendor
-                                ? "/vendor/profile"
-                                : "/user/profile"
-                            }
-                            className="block px-4 py-2 text-sm text-gray-700"
-                          >
-                            Profile
-                          </Link>
                           <button
                             className="block w-full px-4 py-2 text-sm text-left text-gray-700"
                             onClick={logout}
@@ -249,6 +254,15 @@ export default function NavBar() {
           </div>
         </DialogPanel>
       </Dialog>
+      {addVendor && (
+        <AddVendorModal
+          isOpen={addVendor}
+          handleModal={() => {
+            setAddVendor(false);
+          }}
+          handleVendorProducts={() => {}}
+        />
+      )}
     </header>
   );
 }

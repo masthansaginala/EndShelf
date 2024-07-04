@@ -21,9 +21,11 @@ export default function DisputesListAdmin() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <h2 className="text-2xl font-bold mb-6">Disputes List</h2>
+        <h2 className="text-2xl font-bold mb-6 text-custom-focyell">
+          Disputes List
+        </h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border">
+          <table className="min-w-full bg-white border table-wrapper">
             <thead>
               <tr>
                 <th className="py-2 px-4 border-b">Dispute ID</th>
@@ -34,9 +36,6 @@ export default function DisputesListAdmin() {
                 <th className="py-2 px-4 border-b">Description</th>
                 <th className="py-2 px-4 border-b">Remarks</th>
                 <th className="py-2 px-4 border-b">Status</th>
-                <th className="py-2 px-4 border-b">Created At</th>
-                <th className="py-2 px-4 border-b">Updated At</th>
-                <th className="py-2 px-4 border-b">Deleted At</th>
               </tr>
             </thead>
             <tbody>
@@ -46,14 +45,21 @@ export default function DisputesListAdmin() {
                     <td className="py-2 px-4 border-b">{dispute.dispute_id}</td>
                     <td className="py-2 px-4 border-b">{dispute.order_id}</td>
                     <td className="py-2 px-4 border-b">{dispute.user_id}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_category}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_title}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_description}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_remarks || "N/A"}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_status}</td>
-                    <td className="py-2 px-4 border-b">{new Date(dispute.dispute_created_at).toLocaleDateString()}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_updated_at ? new Date(dispute.dispute_updated_at).toLocaleDateString() : "N/A"}</td>
-                    <td className="py-2 px-4 border-b">{dispute.dispute_delete_at ? new Date(dispute.dispute_delete_at).toLocaleDateString() : "N/A"}</td>
+                    <td className="py-2 px-4 border-b">
+                      {dispute.dispute_category}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {dispute.dispute_title}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {dispute.dispute_description}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {dispute.dispute_remarks || "N/A"}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {dispute.dispute_status}
+                    </td>
                   </tr>
                 ))
               ) : (

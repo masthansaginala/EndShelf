@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { getUserOrders, userRaiseDisputeApi, userDeleteDisputeApi } from "../../api/loginapi";
+import {
+  getUserOrders,
+  userRaiseDisputeApi,
+  userDeleteDisputeApi,
+} from "../../api/loginapi";
 import { toast } from "react-toastify";
 
 const disputeCategories = [
@@ -31,7 +35,10 @@ export default function UserOrders() {
     dispute_status: "Open",
   });
 
-  const [deleteDisputeData, setDeleteDisputeData] = useState({ user_id: 0, dispute_id: 0 });
+  const [deleteDisputeData, setDeleteDisputeData] = useState({
+    user_id: 0,
+    dispute_id: 0,
+  });
 
   const fetchUserOrders = async () => {
     const user_id = localStorage.getItem("user_id");
@@ -64,9 +71,9 @@ export default function UserOrders() {
   };
 
   const handleDeleteDispute = async (dispute_id) => {
-    console.log(dispute_id,"d");
+    console.log(dispute_id, "d");
     const user_id = localStorage.getItem("user_id");
-    console.log(user_id,"u");
+    console.log(user_id, "u");
     try {
       await userDeleteDisputeApi(dispute_id, user_id);
       toast.success("Dispute deleted successfully");
@@ -82,43 +89,70 @@ export default function UserOrders() {
   }, []);
 
   return (
-    <div className="bg-white">
+    <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
         <h2 className="text-2xl font-bold mb-6">Your Orders</h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {orders.map((order) => (
-            <div key={order.order_id} className="group relative bg-gray-100 p-4 rounded-lg shadow">
-              <h3 className="text-sm font-medium text-gray-700">Order ID: {order.order_id}</h3>
-              <p className="mt-1 text-lg font-medium text-gray-900">Status: {order.order_status}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Price: ${order.order_price}</p>
-              <p className="mt-1 text-lg font-medium text-gray-900">Quantity: {order.purchased_quantity}</p>
-              <div className="flex justify-between items-center mt-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsOpen(true);
-                    setDisputeFormData({ ...disputeFormData, order_id: order.order_id });
-                  }}
-                  disabled={order.dispute_id !== null}
-                  className={`mt-2 px-4 py-2 text-sm font-medium text-white ${
-                    order.dispute_id !== 0 ? "bg-gray-400" : "bg-custom-orange hover:bg-custom-orange"
-                  } rounded-lg`}
-                >
-                  Raise Dispute
-                </button>
-                {order.dispute_id !== null && (
+          {orders?.length ? (
+            orders.map((order) => (
+              <div
+                key={order.order_id}
+                className="group relative bg-gray-100 p-4 rounded-lg shadow"
+              >
+                <h3 className="text-sm font-medium text-gray-700">
+                  Order ID: {order.order_id}
+                </h3>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Status: {order.order_status}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Price: ${order.order_price}
+                </p>
+                <p className="mt-1 text-lg font-medium text-gray-900">
+                  Quantity: {order.purchased_quantity}
+                </p>
+                <div className="flex justify-between items-center mt-4">
                   <button
                     type="button"
-                    onClick={() => handleDeleteDispute(order.dispute_id)}
-                    className="mt-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg"
+                    onClick={() => {
+                      setIsOpen(true);
+                      setDisputeFormData({
+                        ...disputeFormData,
+                        order_id: order.order_id,
+                      });
+                    }}
+                    disabled={order.dispute_id !== null}
+                    className={`mt-2 px-4 py-2 text-sm font-medium text-white ${
+                      order.dispute_id !== 0
+                        ? "bg-gray-400"
+                        : "bg-custom-orange hover:bg-custom-orange"
+                    } rounded-lg`}
                   >
-                    Delete Dispute
+                    Raise Dispute
                   </button>
-                )}
+                  {order.dispute_id !== null && (
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteDispute(order.dispute_id)}
+                      className="mt-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg"
+                    >
+                      Delete Dispute
+                    </button>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <></>
+          )}
         </div>
+      </div>
+
+      <div className="nodata-wrapper">
+        <p className=" d-flex justify-content-center">
+          There are no current orders. Please check the product page to place an
+          order.
+        </p>
       </div>
 
       {isOpen && (

@@ -97,11 +97,16 @@ const UserProducts = () => {
                               item_category: product?.item_category,
                               item_price: product?.item_price,
                               item_quantity: product?.item_quantity,
-                              item_quantity_available: product?.item_quantity_available,
-                              item_expiry_date: new Date(product?.item_expiry_date)
+                              item_quantity_available:
+                                product?.item_quantity_available,
+                              item_expiry_date: new Date(
+                                product?.item_expiry_date
+                              )
                                 .toISOString()
                                 .split("T")[0],
-                              item_available_date: new Date(product?.item_available_date)
+                              item_available_date: new Date(
+                                product?.item_available_date
+                              )
                                 .toISOString()
                                 .split("T")[0],
                               item_image_url: product?.item_image_url,
