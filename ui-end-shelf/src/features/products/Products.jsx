@@ -44,7 +44,7 @@ export default function Products() {
           </div> */}
           <div className="flex items-baseline justify-center border-b border-gray-200 bg-custom-appbg">
             <h5 className="text-2xl font-bold tracking-tight text-gray-900">
-              Products
+             End Shelf Products
             </h5>
           </div>
 
@@ -75,7 +75,7 @@ export default function Products() {
                                 {product?.item_name}
                               </h3>
                               <p className="mt-1 text-lg font-medium text-gray-900">
-                                ₹ {product?.item_price}/-
+                                $ {product?.item_price}/-
                               </p>
                               <h3 className="text-sm text-gray-700">
                                 Available Quantity:{" "}

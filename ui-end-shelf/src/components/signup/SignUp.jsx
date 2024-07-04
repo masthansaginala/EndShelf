@@ -250,7 +250,7 @@ const SignUp = () => {
                 />
                 {errors.user_address && (
                   <p className="mt-2 text-sm text-red-600">
-                    {errors?.user_address}
+                    error
                   </p>
                 )}
               </div>

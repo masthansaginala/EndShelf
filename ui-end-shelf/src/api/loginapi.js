@@ -58,7 +58,7 @@ export const addItemApi = async (data) => {
   try {
     const response = await axios.post("http://127.0.0.1:8000/vendor-item/", data, {
       headers: {
-        Authorization: localStorage.getItem("access_token"),
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         "Content-Type": "multipart/form-data",
       },
     });
@@ -73,7 +73,7 @@ export const editItemApi = async (data, id) => {
   try {
     const response = await axios.put(`http://127.0.0.1:8000/vendor-item-update/?item_id=${id}`, data, {
       headers: {
-        Authorization: localStorage.getItem("access_token"),
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         "Content-Type": "multipart/form-data",
       },
     });

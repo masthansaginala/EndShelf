@@ -34,7 +34,6 @@ export default function OrdersListAdmin() {
                 <th className="py-2 px-4 border-b">Purchased Quantity</th>
                 <th className="py-2 px-4 border-b">Order Price</th>
                 <th className="py-2 px-4 border-b">Order Status</th>
-                <th className="py-2 px-4 border-b">Dispute ID</th>
               </tr>
             </thead>
             <tbody>
@@ -49,9 +48,6 @@ export default function OrdersListAdmin() {
                     </td>
                     <td className="py-2 px-4 border-b">{order.order_price}</td>
                     <td className="py-2 px-4 border-b">{order.order_status}</td>
-                    <td className="py-2 px-4 border-b">
-                      {order.dispute_id || "N/A"}
-                    </td>
                   </tr>
                 ))
               ) : (

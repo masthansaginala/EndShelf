@@ -34,8 +34,6 @@ export default function UsersListAdmin() {
                 <th className="py-2 px-4 border-b">Gender</th>
                 <th className="py-2 px-4 border-b">Phone</th>
                 <th className="py-2 px-4 border-b">Email</th>
-                <th className="py-2 px-4 border-b">Address</th>
-                <th className="py-2 px-4 border-b">City</th>
                 <th className="py-2 px-4 border-b">Country</th>
                 <th className="py-2 px-4 border-b">Zipcode</th>
                 <th className="py-2 px-4 border-b">Organisation</th>
@@ -56,15 +54,13 @@ export default function UsersListAdmin() {
                       {user.user_phone_number}
                     </td>
                     <td className="py-2 px-4 border-b">{user.user_email}</td>
-                    <td className="py-2 px-4 border-b">{user.user_address}</td>
-                    <td className="py-2 px-4 border-b">{user.user_city}</td>
                     <td className="py-2 px-4 border-b">{user.user_country}</td>
                     <td className="py-2 px-4 border-b">{user.user_zipcode}</td>
                     <td className="py-2 px-4 border-b">
                       {user.user_organisation}
                     </td>
                     <td className="py-2 px-4 border-b">
-                      {user.user_orgainsation_type}
+                      {user.user_organisation_type}
                     </td>
                   </tr>
                 ))
