@@ -54,7 +54,7 @@ export default function VendorRequest() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold mb-6">Orders</h2>
+        <h2 className="text-2xl font-bold mb-6">Vendor Requests</h2>
         <div className="mb-4">
           <label
             htmlFor="order_status_filter"
@@ -178,7 +178,7 @@ export default function VendorRequest() {
                   </div>
                   <button
                     type="submit"
-                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent custom-orange px-8 py-3 text-base font-medium text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-custom-orange px-8 py-3 text-base font-medium text-white hover:bg-custom-orange focus:outline-none focus:ring-2 focus:ring-custom-orange focus:ring-offset-2"
                   >
                     Update Status
                   </button>

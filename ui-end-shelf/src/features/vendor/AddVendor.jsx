@@ -172,7 +172,7 @@ export default function AddVendorModal({ isOpen, handleModal, handleVendorProduc
 
               <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                 <div className="sm:col-span-8 lg:col-span-7">
-                  <div className="flex justify-center items-center min-h-screen bg-gray-100">
+                  <div className="flex justify-center items-center min-h-screen bg-white">
                     <form
                       onSubmit={handleSubmit}
                       className="bg-white p-8 pt-0 rounded-lg  w-full max-w-lg"

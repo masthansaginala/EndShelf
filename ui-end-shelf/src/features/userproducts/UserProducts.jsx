@@ -52,9 +52,9 @@ const UserProducts = () => {
     <div>
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-          <h2 className="sr-only">Products</h2>
+          <h2 className="sr-only">End Shelf Products</h2>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">Your Products</h2>
+            <h2 className="text-2xl font-bold text-gray-900">End Shelf Products</h2>
             <button
               type="button"
               onClick={() => {
@@ -85,6 +85,9 @@ const UserProducts = () => {
                   <div className="flex justify-between items-center">
                     <p className="mt-1 text-lg font-medium text-gray-900">
                       ${product?.item_price}
+                    </p>
+                    <p className="mt-1 text-lg font-medium text-gray-900">
+                      Available: {product?.item_quantity_available}
                     </p>
                     <div className="flex justify-end space-x-2">
                       <div

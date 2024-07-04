@@ -91,13 +91,13 @@ export default function UserOrders() {
   return (
     <div className="">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 className="text-2xl font-bold mb-6">Your Orders</h2>
+        <h2 className="text-2xl font-bold mb-6">My Orders</h2>
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
           {orders?.length ? (
             orders.map((order) => (
               <div
                 key={order.order_id}
-                className="group relative bg-gray-100 p-4 rounded-lg shadow"
+                className="group relative bg-custom-card p-4 rounded-lg shadow"
               >
                 <h3 className="text-sm font-medium text-gray-700">
                   Order ID: {order.order_id}
@@ -134,7 +134,7 @@ export default function UserOrders() {
                     <button
                       type="button"
                       onClick={() => handleDeleteDispute(order.dispute_id)}
-                      className="mt-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg"
+                      className="mt-2 ml-2 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg"
                     >
                       Delete Dispute
                     </button>
@@ -143,16 +143,26 @@ export default function UserOrders() {
               </div>
             ))
           ) : (
-            <></>
+            <>
+            </>
           )}
         </div>
-      </div>
-
-      <div className="nodata-wrapper">
-        <p className=" d-flex justify-content-center">
-          There are no current orders. Please check the product page to place an
-          order.
-        </p>
+        {orders?.length ? (
+            <></>
+          ) : (
+            <>
+              <div className="flex items-center justify-center h-full">
+                <div className="text-center">
+                  <p className="text-lg font-semibold text-gray-800 mb-2">
+                    No Orders
+                  </p>
+                  <p className="text-gray-500">
+                    OOPS..! Seems Not Ordered Anything . Visit Prodcuts Page.
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
       </div>
 
       {isOpen && (

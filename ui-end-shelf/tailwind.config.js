@@ -7,7 +7,8 @@ module.exports = {
         'custom-orange': '#ff7d00',
         'custom-yellowbg': '#fdf4b4',
         'custom-errortxt': '#2d3d37',
-        'custom-focyell': '#2d3d37'
+        'custom-focyell': '#2d3d37',
+        'custom-card':'#ffbf80'
       },
     },
   },

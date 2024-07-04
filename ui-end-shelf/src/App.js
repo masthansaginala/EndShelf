@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -29,12 +29,41 @@ import DisputesListAdmin from "./admin/DisputesListAdmin";
 import EndShelf from "./features/publicpages/EndShelf";
 import Value from "./features/publicpages/Value";
 import WhyUs from "./features/publicpages/WhyUs";
+import axiosInstance from "./api/axiosInstance";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
+  const [loading,setLoading]=useState(false)
+  useEffect(() => {
+    axiosInstance.interceptors.request.use(
+      function (config) {
+        setLoading(true);
+        return config;
+      },
+      function (error) {
+        setLoading(false);
+        return Promise.reject(error);
+      }
+    );
+
+    axiosInstance.interceptors.response.use(
+      function (response) {
+        setLoading(false);
+        return response;
+      },
+      function (error) {
+        setLoading(false);
+        console.log("intercept", error);
+        return Promise.reject(error);
+      }
+    );
+  }, []);
+  console.log("loader->",loading)
   return (
     <AuthProvider>
       <Router>
         <NavBar />
+        {loading&&<Loader/>}
         <Routes>
           <Route path="/" element={<Navigate to="/end-shelf" />} />
           <Route path="/end-shelf" element={<EndShelf />} />

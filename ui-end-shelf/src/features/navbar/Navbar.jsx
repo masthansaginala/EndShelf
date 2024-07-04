@@ -116,7 +116,7 @@ export default function NavBar() {
               onClick={() => {
                 setAddVendor({ isOpen: true, mode: "new" });
               }}
-              className="text-white text-sm font-semibold leading-6 nav-color-wrapper"
+              className="text-white text-sm font-semibold leading-6 nav-color-wrapper cursor-pointer"
             >
               Add Vendor
             </p>
