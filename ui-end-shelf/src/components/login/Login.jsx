@@ -29,7 +29,7 @@ const Login = () => {
         navigate("/user/home");
       }
     } catch (error) {
-      toast.error(error?.response?.data?.error);
+      toast.error(error?.response?.data?.detail);
       console.error("Error fetching user data:", error?.error);
     }
   };
