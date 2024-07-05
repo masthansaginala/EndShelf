@@ -7,6 +7,7 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { addVendorApi, editVendorApi } from "../../api/loginapi";
 import { toast } from "react-toastify";
+import { useAuth } from "../../auth/AuthContext";
 
 const initialFormData = {
   vendor_shop_name: "",
@@ -35,6 +36,7 @@ const initialFormErrors = {
 export default function AddVendorModal({ isOpen, handleModal, handleVendorProducts }) {
   const [formData, setFormData] = useState(initialFormData);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
+  const { logout } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +56,7 @@ export default function AddVendorModal({ isOpen, handleModal, handleVendorProduc
       setFormErrors(initialFormErrors);
       handleVendorProducts();
       handleModal();
+      logout();
       console.log("vendor->", data);
     } catch (error) {
       console.error("Error adding vendor:", error);
