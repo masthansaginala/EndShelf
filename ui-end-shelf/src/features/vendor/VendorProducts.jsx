@@ -2,7 +2,6 @@ import { PencilSquareIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import AlertModal from "../../components/alertModal/AlertModal";
 import { deleteItemApi, getVendorItems } from "../../api/loginapi";
-import PageNotFound from "../pagenotfound/PageNotFound";
 import { toast } from "react-toastify";
 import AddItem from "./AddItem";
 
