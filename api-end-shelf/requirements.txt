@@ -1,0 +1,10 @@
+fastapi==0.103.1
+psycopg2-binary==2.9.8
+python-dotenv==1.0.1
+cors==1.0.1
+sqlalchemy==2.0.19
+uvicorn==0.23.2
+bcrypt==4.0.1
+PyJWTt==2.8.0
+azure-storage-blob==12.20.0
+python-multipart==0.0.9
